@@ -1,4 +1,5 @@
 #import
+from logging import PlaceHolder
 import streamlit as st
 import numpy as np
 import pandas as pd 
@@ -20,43 +21,36 @@ import streamlit as st
 from htbuilder import HtmlElement, div, ul, li, br, hr, a, p, img, styles, classes, fonts
 from htbuilder.units import percent
 from htbuilder.funcs import rgba, rgb
-
-
-#Important variable
-path = "./"
-files = "full_"
-file_end = ".csv"
-col_list = ['date_mutation',
-        'nature_mutation',
-        'valeur_fonciere',
-        'code_postal',
-        'type_local',
-        'longitude', 
-        'latitude',
-        "code_departement",
-        'nature_culture'
-        ]
-
-st.sidebar.header("Navigation")
-#Fonction
-file = open("time.txt", "w+")
-def timing(f):
-    @wraps(f)
-    def wrapper(*args, **kwargs):
-        start = time()
-        result = f(*args, **kwargs)
-        end = time()
-        file.write('Temps écoulé : {}'.format((end-start)) + "sec")
-        return result
-    return wrapper
+from sklearn.linear_model import LinearRegression
 
 
 
 
 
 
+dataframe = "full_paris_view.csv"
+df = pd.read_csv(dataframe)
 
-st.info('Source of the dataset :  https://www.data.gouv.fr/en/datasets/demandes-de-valeurs-foncieres/ ')
+
+X = df[['code_postal', 'surface_reelle_bati', 'nombre_pieces_principales', 'type_local']]
+y = df["valeur_fonciere"]
+model=LinearRegression()
+model.fit(X,y)
+
+
+# nombre_pieces_principales
+# type_local
+# code_postal
+# surface_reelle_bati
+nb_piece = st.text_input(label="Nombre de pièces", key="nb_piece")
+type_local = st.text_input(label="Type de local", key="type_local")
+cp = st.text_input(label="Code postal", key="cp")
+surface = st.text_input(label="Surface à bâtir", key="surface")
+
+if st.button(label="Prédire", key="submit"):
+    y_pred = model.predict([[nb_piece], [type_local], [cp], [surface]])
+    st.title(y_pred)
+
 
 
 #Footer and Layer with images and links (LinkedIn)
