@@ -174,14 +174,14 @@ def footer():
         image('https://i.postimg.cc/wTbVHYDJ/st-removebg-preview.jpg',
               width=px(25), height=px(25)),
         " with 💙 by ",
-        link("https://www.linkedin.com/in/wassim-zouitene/", "Wassim_ZOUITENE"),
-        " at 🏠",
+        "FONCI'AZURE",
+        " at Efrei Paris",
     ]
     layout(*myargs)
 
 def header():
     myargs = [
-        image('https://i.postimg.cc/RFyHy4kV/logo2.jpg',width=px(550), height=px(35))
+        image('https://i.postimg.cc/GmL547SX/FONCIAZURE-name.png',width=px(150), height=px(100))
     ]
     layout2(*myargs)
 
