@@ -30,9 +30,9 @@ from sklearn.linear_model import LinearRegression
 
 dataframe = "full_paris_view.csv"
 df = pd.read_csv(dataframe)
+df.dropna(inplace=True)
 
-
-X = df[['code_postal', 'surface_reelle_bati', 'nombre_pieces_principales', 'type_local']]
+X = df[['code_postal', 'surface_reelle_bati', 'nombre_pieces_principales']]
 y = df["valeur_fonciere"]
 model=LinearRegression()
 model.fit(X,y)
@@ -168,7 +168,7 @@ def footer():
         image('https://i.postimg.cc/wTbVHYDJ/st-removebg-preview.jpg',
               width=px(25), height=px(25)),
         " with 💙 by ",
-        link("https://www.linkedin.com/in/wassim-zouitene/", "Wassim_ZOUITENE"),
+        link("https://www.linkedin.com/in/wassim-zouitene/", "FONCI'AZURE"),
         " at 🏠",
     ]
     layout(*myargs)
@@ -180,6 +180,6 @@ def header():
     layout2(*myargs)
 
 footer()
-header()
+
 
  
